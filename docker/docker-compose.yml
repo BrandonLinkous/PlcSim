@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  plc-sim:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.plc
+    ports:
+      - "5010:5010"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://plc-sim:5010/status"]
+      interval: 2s
+      retries: 25
+
+  tests:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.tests
+    depends_on:
+      plc-sim:
+        condition: service_healthy
+    environment:
+      - PLC_URL=http://plc-sim:5010

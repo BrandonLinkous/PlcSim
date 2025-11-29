@@ -1,0 +1,13 @@
+# Use .NET SDK image since we need to build and run tests
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS test
+WORKDIR /src
+
+# Copy entire solution into container
+COPY . .
+
+# Restore test project dependencies
+WORKDIR /src/SystemTests
+RUN dotnet restore SystemTests.csproj
+
+# Run the tests with rich console output
+CMD ["dotnet", "test", "SystemTests.csproj", "--logger:console;verbosity=detailed"]

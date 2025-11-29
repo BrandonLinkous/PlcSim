@@ -1,0 +1,24 @@
+# Ignore build and user-specific files
+bin/
+obj/
+.vs/
+TestResults/
+Dockerfile.*.old
+*.trx
+ailab9/
+aiproject4/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Python cache (if any ever appear)
+__pycache__/
+
+# Don't include the BucStop repo
+BucStop/
+
+# Rider & VS state
+.idea/
+*.user
+*.suo
